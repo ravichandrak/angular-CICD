@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo install step...
+  pre_build:
+    commands:
+      - echo logging in to AWS ECR...
+      - $(aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 449647973168.dkr.ecr.ap-south-1.amazonaws.com)
+  build:
+    commands:
+      - echo build Docker image on `date`
+      - docker build -t angular_cicd .
+      - docker tag angular_cicd:latest 449647973168.dkr.ecr.ap-south-1.amazonaws.com/angular_cicd:latest
+  post_build:
+    commands:
+      - echo build Docker image complete `date`
+      - echo push latest Docker images to ECR...
+      - docker push 449647973168.dkr.ecr.ap-south-1.amazonaws.com/angular_cicd:latest
