@@ -9,7 +9,7 @@ import {Component, Input} from '@angular/core';
 })
 export class BooksWebHeaderComponent {
     
-    @Input() public title = 'Web App - Production';
+    @Input() public title = 'Web App - Production - 2';
     
     public selectedIndex;
 
